@@ -6,7 +6,7 @@ An end-to-end, serverless data pipeline on AWS that ingests incremental daily or
 
 ## Architecture
 
-![Architecture](screenshots/architecture.png)
+<img width="2800" height="1040" alt="9a28e468-75ab-45f2-b218-b77523bfbcd3" src="https://github.com/user-attachments/assets/824f2573-8692-427f-8a4e-3c0ee81090a7" />
 
 ```
 Orders data (CSV) → S3 → Glue Crawler → Glue Data Catalog → Athena (SQL) → QuickSight (Dashboards)

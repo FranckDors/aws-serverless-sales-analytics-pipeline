@@ -48,8 +48,7 @@ That is roughly a **54% reduction** in data scanned, which means lower cost and 
 
 ```sql
 -- 1. Total sales by category (the query behind the bar chart)
-SELECT category, SUM(sales) AS category_sales
-FROM orders
+SELECT category, SUM(sales) FROM "db_superstoreswl1"."superstore_da01"
 GROUP BY category;
 
 -- 2. Full table scan across all partitions

@@ -39,42 +39,40 @@ Filtering on the partition column reduced the data Athena scanned:
 
 | Query | Data Scanned |
 |-------|--------------|
-| `SELECT *` (all partitions) | 5.47 KB |
+| `SELECT *` (all partitions) | 4.46 KB |
 | `WHERE snapshot_day = '20170101'` | 2.52 KB |
 
 That is roughly a **54% reduction** in data scanned, which means lower cost and faster queries. The dataset is small, but the same principle scales to large data.
 
-## Query's Ran 
+## Queries I Ran
 
+```sql
 -- 1. Total sales by category (the query behind the bar chart)
 SELECT category, SUM(sales) AS category_sales
 FROM orders
 GROUP BY category;
 
--- 2. Full table scan across all partitions (5.47 KB scanned)
+-- 2. Full table scan across all partitions
 SELECT * FROM orders;
 
--- 3. Partition-pruned query, one day only (2.52 KB scanned)
+-- 3. Partition-pruned query, one day only
 SELECT * FROM orders
-WHERE snapshot_day = '2017-01-01'
+WHERE snapshot_day = '20170101';
 
 -- 4. Profit by city (the data behind the pie chart)
 SELECT city, SUM(profit) AS total_profit
 FROM orders
 GROUP BY city
 ORDER BY total_profit DESC;
-
 ```
-
 ## Screenshots
-[Screenshot 2026-11-03 152511.zip](https://github.com/user-attachments/files/34339897/Screenshot.2026-11-03.152511.zip)
+
+Screenshots of each stage (S3 partitions, Glue table schema, Athena queries, and the QuickSight dashboard) are in the [`screenshots/`](screenshots/) folder.
 
 | | |
 |---|---|
 | S3 partition folders | Glue table schema |
 | Athena query and data scanned | QuickSight dashboard |
-
-(Add images in the `screenshots/` folder and link them here.)
 
 ## What I Learned
 

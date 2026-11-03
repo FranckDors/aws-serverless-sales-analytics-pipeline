@@ -44,12 +44,26 @@ Filtering on the partition column reduced the data Athena scanned:
 
 That is roughly a **54% reduction** in data scanned, which means lower cost and faster queries. The dataset is small, but the same principle scales to large data.
 
-## Sample Query
+## Query's Ran 
 
-```sql
+-- 1. Total sales by category (the query behind the bar chart)
 SELECT category, SUM(sales) AS category_sales
 FROM orders
 GROUP BY category;
+
+-- 2. Full table scan across all partitions (5.47 KB scanned)
+SELECT * FROM orders;
+
+-- 3. Partition-pruned query, one day only (2.52 KB scanned)
+SELECT * FROM orders
+WHERE snapshot_day = '2017-01-01'
+
+-- 4. Profit by city (the data behind the pie chart)
+SELECT city, SUM(profit) AS total_profit
+FROM orders
+GROUP BY city
+ORDER BY total_profit DESC;
+
 ```
 
 ## Screenshots

